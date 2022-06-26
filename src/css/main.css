@@ -49,9 +49,6 @@ ul {
   display: -ms-flexbox;
   display: flex;
 }
-.slick-track .flex-item {
-  height: 100%;
-}
 
 .line {
   position: absolute;
@@ -99,7 +96,7 @@ ul {
   font-size: 20px;
   line-height: 44px;
   text-align: center;
-  color: #FFFFFF;
+  color: #fff;
 }
 @media (min-width: 769px) {
   .news-section .title-holder h2 {
@@ -192,13 +189,13 @@ ul {
   display: block;
   font-family: "Open Sans", sans-serif;
   padding: 0 20px;
+  color: #2C4058;
 }
 .child strong {
   font-weight: 700;
   font-size: 16px;
   line-height: 20px;
   margin-bottom: 15px;
-  color: #2C4058;
 }
 @media (min-width: 769px) {
   .child strong {
@@ -215,7 +212,6 @@ ul {
 .child span {
   font-size: 14px;
   line-height: 20px;
-  color: #2C4058;
   margin-bottom: 39px;
 }
 @media (min-width: 769px) {
@@ -246,7 +242,7 @@ ul {
   border-radius: 50%;
 }
 .avatar-holder .info-holder {
-  font-family: "Montserrat";
+  font-family: "Montserrat", sans-serif;
   padding: 0 20px;
 }
 .avatar-holder .info-holder span {
