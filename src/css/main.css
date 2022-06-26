@@ -1,0 +1,264 @@
+*,
+*::before,
+*::after {
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: "Montserrat", sans-serif;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+h1,
+p,
+h2,
+h3,
+h4 {
+  margin: 0;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.container {
+  max-width: 1200px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+/* mixin usage */
+/*--------------------------------
+	Responsive ratio
+	Used for creating scalable elements that maintain the same ratio
+	example:
+	.element {
+		@include responsive-ratio(400, 300);
+	}
+*/
+.slick-track {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+.slick-track .flex-item {
+  height: 100%;
+}
+
+.line {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  -webkit-transform: translateX(-50%);
+          transform: translateX(-50%);
+  width: 100px;
+  border-top: 1px solid #fff;
+}
+
+.news-section {
+  position: relative;
+  padding: 20px 0 40px;
+  background: linear-gradient(237.1deg, #24CCFA 11.16%, #3C7FD4 89.18%);
+}
+@media (min-width: 1025px) {
+  .news-section {
+    padding: 135px 0 213px;
+  }
+}
+.news-section::before {
+  content: "";
+  position: absolute;
+  display: block;
+  max-width: 1600px;
+  width: 100%;
+  max-height: 590px;
+  height: 100%;
+  background-image: url("../img/city.svg");
+  bottom: 0;
+  left: -12px;
+}
+.news-section .title-holder {
+  position: relative;
+}
+@media (min-width: 1025px) {
+  .news-section .title-holder {
+    margin-bottom: 59px;
+  }
+}
+.news-section .title-holder h2 {
+  padding: 30px;
+  display: block;
+  font-size: 20px;
+  line-height: 44px;
+  text-align: center;
+  color: #FFFFFF;
+}
+@media (min-width: 769px) {
+  .news-section .title-holder h2 {
+    font-size: 30px;
+    line-height: 54px;
+  }
+}
+@media (min-width: 1025px) {
+  .news-section .title-holder h2 {
+    font-size: 44px;
+    line-height: 54px;
+  }
+}
+
+.slick-dots {
+  bottom: -40px !important;
+}
+@media (min-width: 1025px) {
+  .slick-dots {
+    bottom: -60px !important;
+  }
+}
+.slick-dots li {
+  margin: 0 10px !important;
+}
+
+.slick-dots li.slick-active button:after {
+  color: white;
+  opacity: 1;
+}
+
+.slick-dots li button::before {
+  display: none;
+}
+.slick-dots li button::after {
+  content: "";
+  display: block;
+  width: 10px;
+  height: 10px;
+  background-color: #fff;
+  border-radius: 50%;
+  position: absolute;
+  opacity: 0.25;
+}
+
+.slick-next::before,
+.slick-prev::before {
+  display: none;
+}
+
+.slick-next {
+  right: -55px !important;
+}
+.slick-next::after {
+  display: block;
+  content: "";
+  width: 40px;
+  height: 40px;
+  background-image: url("../img/right.svg");
+  background-repeat: no-repeat;
+}
+
+.slick-prev {
+  left: -75px !important;
+}
+.slick-prev::after {
+  display: block;
+  content: "";
+  width: 40px;
+  height: 40px;
+  background-image: url("../img/left.svg");
+  background-repeat: no-repeat;
+}
+
+.child {
+  background-color: #fff;
+  padding-bottom: 30px;
+}
+@media (min-width: 769px) {
+  .child {
+    height: 515px;
+  }
+}
+.child .img-holder img {
+  width: 100%;
+  margin-bottom: 30px;
+}
+.child strong,
+.child span {
+  display: block;
+  font-family: "Open Sans", sans-serif;
+  padding: 0 20px;
+}
+.child strong {
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 20px;
+  margin-bottom: 15px;
+  color: #2C4058;
+}
+@media (min-width: 769px) {
+  .child strong {
+    font-size: 18px;
+    line-height: 24px;
+  }
+}
+@media (min-width: 1025px) {
+  .child strong {
+    font-size: 22px;
+    line-height: 27px;
+  }
+}
+.child span {
+  font-size: 14px;
+  line-height: 20px;
+  color: #2C4058;
+  margin-bottom: 39px;
+}
+@media (min-width: 769px) {
+  .child span {
+    font-size: 16px;
+    line-height: 23px;
+  }
+}
+@media (min-width: 1025px) {
+  .child span {
+    font-size: 18px;
+    line-height: 25px;
+  }
+}
+
+.flex-item {
+  padding: 0 15px;
+}
+
+.avatar-holder {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  padding: 0 20px;
+  margin-bottom: 30px;
+}
+.avatar-holder img {
+  border-radius: 50%;
+}
+.avatar-holder .info-holder {
+  font-family: "Montserrat";
+  padding: 0 20px;
+}
+.avatar-holder .info-holder span {
+  margin-bottom: 0;
+  padding: 0;
+  font-size: 14px;
+  line-height: 17px;
+  color: #55B7FF;
+}
+.avatar-holder .info-holder h4 {
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 22px;
+  color: #2C4058;
+}

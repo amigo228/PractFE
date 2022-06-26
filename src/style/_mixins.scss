@@ -32,10 +32,9 @@
 ///  $breakpoints: ('phone': 320px);
 ///
 $breakpoints: (
-        'phone': 320px,
-        'tablet': 768px,
-        'desktop': 1024px
-) !default;
+  'phone': 320px,
+  'tablet': 768px,
+  'desktop': 1024px) !default;
 
 
 ///
@@ -50,14 +49,14 @@ $breakpoints: (
 ///  );
 ///
 $media-expressions: (
-        'screen': 'screen',
-        'print': 'print',
-        'handheld': 'handheld',
-        'landscape': '(orientation: landscape)',
-        'portrait': '(orientation: portrait)',
-        'retina2x': '(-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi)',
-        'retina3x': '(-webkit-min-device-pixel-ratio: 3), (min-resolution: 350dpi)'
-) !default;
+  'screen': 'screen',
+  'print': 'print',
+  'handheld': 'handheld',
+  'landscape': '(orientation: landscape)',
+  'portrait': '(orientation: portrait)',
+  'retina2x': '(-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi)',
+  'retina3x': '(-webkit-min-device-pixel-ratio: 3), (min-resolution: 350dpi)'
+  ) !default;
 
 
 ///
@@ -82,10 +81,9 @@ $media-expressions: (
 ///  @media (min-width: 2.1rem) {}
 ///
 $unit-intervals: (
-        'px': 1,
-        'em': 0.01,
-        'rem': 0.1
-) !default;
+  'px': 1,
+  'em': 0.01,
+  'rem': 0.1) !default;
 
 ///
 /// Defines whether support for media queries is available, useful for creating separate stylesheets
@@ -168,7 +166,10 @@ $im-no-media-breakpoint: 'desktop' !default;
 ///
 ///  /* No output */
 ///
-$im-no-media-expressions: ('screen', 'portrait', 'landscape') !default;
+$im-no-media-expressions: (
+  'screen',
+  'portrait',
+  'landscape') !default;
 
 ////
 /// Cross-engine logging engine
@@ -187,12 +188,15 @@ $im-no-media-expressions: ('screen', 'portrait', 'landscape') !default;
 @function log($message) {
   @if feature-exists('at-error') {
     @error $message;
-  } @else {
-    @warn $message;
-    $_: noop();
   }
 
-  @return $message;
+  @else {
+    @warn $message;
+    $_: noop(
+  );
+}
+
+@return $message;
 }
 
 
@@ -235,11 +239,12 @@ $im-no-media-expressions: ('screen', 'portrait', 'landscape') !default;
       $prefix: get-expression-prefix($operator);
       $value: get-expression-value($condition, $operator);
 
-      @if ($prefix == 'max' and $value <= $no-media-breakpoint-value) or
-					($prefix == 'min' and $value > $no-media-breakpoint-value) {
+      @if ($prefix =='max' and $value <=$no-media-breakpoint-value) or ($prefix =='min' and $value > $no-media-breakpoint-value) {
         @return false;
       }
-    } @else if not index($im-no-media-expressions, $condition) {
+    }
+
+    @else if not index($im-no-media-expressions, $condition) {
       @return false;
     }
   }
@@ -290,7 +295,7 @@ $im-no-media-expressions: ('screen', 'portrait', 'landscape') !default;
   $parsed-dimension: str-slice($expression, 0, $operator-index - 1);
   $dimension: 'width';
 
-  @if str-length($parsed-dimension) > 0 {
+  @if str-length($parsed-dimension)>0 {
     $dimension: $parsed-dimension;
   }
 
@@ -324,7 +329,9 @@ $im-no-media-expressions: ('screen', 'portrait', 'landscape') !default;
 
   @if map-has-key($breakpoints, $value) {
     $value: map-get($breakpoints, $value);
-  } @else {
+  }
+
+  @else {
     $value: to-number($value);
   }
 
@@ -339,9 +346,11 @@ $im-no-media-expressions: ('screen', 'portrait', 'landscape') !default;
     $_: log('Unknown unit `#{unit($value)}`.');
   }
 
-  @if $operator == '>' {
-    $value: $value + $interval;
-  } @else if $operator == '<' {
+  @if $operator =='>' {
+    $value: $value +$interval;
+  }
+
+  @else if $operator =='<' {
     $value: $value - $interval;
   }
 
@@ -357,6 +366,7 @@ $im-no-media-expressions: ('screen', 'portrait', 'landscape') !default;
 /// @return {String} - Valid media query
 ///
 @function parse-expression($expression) {
+
   // If it is part of $media-expressions, it has no operator
   // then there is no need to go any further, just return the value
   @if map-has-key($media-expressions, $expression) {
@@ -383,17 +393,18 @@ $im-no-media-expressions: ('screen', 'portrait', 'landscape') !default;
 /// @return {List} Sliced list
 ///
 @function slice($list, $start: 1, $end: length($list)) {
-  @if length($list) < 1 or $start > $end {
+  @if length($list) < 1 or $start >$end {
     @return ();
   }
 
-  $result: ();
+  $result: (
+  );
 
-  @for $i from $start through $end {
-    $result: append($result, nth($list, $i));
-  }
+@for $i from $start through $end {
+  $result: append($result, nth($list, $i));
+}
 
-  @return $result;
+@return $result;
 }
 
 ////
@@ -411,35 +422,53 @@ $im-no-media-expressions: ('screen', 'portrait', 'landscape') !default;
 /// @return {Number}
 ///
 @function to-number($value) {
-  @if type-of($value) == 'number' {
+  @if type-of($value)=='number' {
     @return $value;
-  } @else if type-of($value) != 'string' {
+  }
+
+  @else if type-of($value) !='string' {
     $_: log('Value for `to-number` should be a number or a string.');
   }
 
   $result: 0;
   $digits: 0;
-  $minus: str-slice($value, 1, 1) == '-';
-  $numbers: ('0': 0, '1': 1, '2': 2, '3': 3, '4': 4, '5': 5, '6': 6, '7': 7, '8': 8, '9': 9);
+  $minus: str-slice($value, 1, 1)=='-';
+  $numbers: (
+    '0': 0,
+    '1': 1,
+    '2': 2,
+    '3': 3,
+    '4': 4,
+    '5': 5,
+    '6': 6,
+    '7': 7,
+    '8': 8,
+    '9': 9
+  );
 
-  @for $i from if($minus, 2, 1) through str-length($value) {
-    $character: str-slice($value, $i, $i);
+@for $i from if($minus, 2, 1) through str-length($value) {
+  $character: str-slice($value, $i, $i);
 
-    @if not (index(map-keys($numbers), $character) or $character == '.') {
-      @return to-length(if($minus, -$result, $result), str-slice($value, $i))
-    }
-
-    @if $character == '.' {
-      $digits: 1;
-    } @else if $digits == 0 {
-      $result: $result * 10 + map-get($numbers, $character);
-    } @else {
-      $digits: $digits * 10;
-      $result: $result + map-get($numbers, $character) / $digits;
-    }
+  @if not (index(map-keys($numbers), $character) or $character =='.') {
+    @return to-length(if($minus, -$result, $result), str-slice($value, $i))
   }
 
-  @return if($minus, -$result, $result);;
+  @if $character =='.' {
+    $digits: 1;
+  }
+
+  @else if $digits ==0 {
+    $result: $result * 10+map-get($numbers, $character);
+  }
+
+  @else {
+    $digits: $digits * 10;
+    $result: $result +map-get($numbers, $character) / $digits;
+  }
+}
+
+@return if($minus, -$result, $result);
+;
 }
 
 
@@ -511,8 +540,8 @@ $im-no-media-expressions: ('screen', 'portrait', 'landscape') !default;
   @content;
 
   // Restore global configuration
-  $breakpoints: $global-breakpoints !global;
-  $media-expressions: $tweak-media-expressions !global;
+  $breakpoints: $global-breakpoints  !global;
+  $media-expressions: $tweak-media-expressions  !global;
 }
 
 ////
@@ -546,15 +575,17 @@ $im-no-media-expressions: ('screen', 'portrait', 'landscape') !default;
 ///  @include media('>=350px', '<tablet', 'retina3x') { }
 ///
 @mixin media($conditions...) {
-  @if ($im-media-support and length($conditions) == 0) or
-			(not $im-media-support and im-intercepts-static-breakpoint($conditions...)) {
+  @if ($im-media-support and length($conditions)==0) or (not $im-media-support and im-intercepts-static-breakpoint($conditions...)) {
     @content;
-  } @else if ($im-media-support and length($conditions) > 0) {
+  }
+
+  @else if ($im-media-support and length($conditions) > 0) {
     @media #{unquote(parse-expression(nth($conditions, 1)))} {
+
       // Recursive call
       @include media(slice($conditions, 2)...) {
-      @content;
-    }
+        @content;
+      }
     }
   }
 }
@@ -579,7 +610,7 @@ $im-no-media-expressions: ('screen', 'portrait', 'landscape') !default;
     min-height: $va-height;
   }
 
-  > * {
+  >* {
     white-space: normal;
     display: inline-block;
     vertical-align: $va-direction;
@@ -594,13 +625,15 @@ $im-no-media-expressions: ('screen', 'portrait', 'landscape') !default;
 //     or @include v-align-pair(image, text, bottom);
 //     or @include v-align-pair(image, text, middle, 200px);
 //
-@mixin v-align-pair($child-name1, $child-name2, $valign: middle, $width1: auto, $width2: auto ) {
+@mixin v-align-pair($child-name1, $child-name2, $valign: middle, $width1: auto, $width2: auto) {
   display: table;
-  .#{$child-name1}{
+
+  .#{$child-name1} {
     display: table-cell;
     vertical-align: $valign;
     width: $width1;
   }
+
   .#{$child-name2} {
     display: table-cell;
     vertical-align: $valign;
@@ -630,14 +663,21 @@ $im-no-media-expressions: ('screen', 'portrait', 'landscape') !default;
 // @include linear-gradient(#00FFFF,#0080FF,45deg);
 // }
 
-@mixin linear-gradient($color-one,$color-two,$degrees) {
-  background: -moz-linear-gradient($degrees, $color-one 0%, $color-two 100%); /* ff3.6+ */
-  background: -webkit-gradient(linear, left top, right top, color-stop(0%, $color-one), color-stop(100%, $color-two)); /* safari4+,chrome */
-  background: -webkit-linear-gradient($degrees, $color-one 0%, $color-two 100%); /* safari5.1+,chrome10+ */
-  background: -o-linear-gradient($degrees, $color-one 0%, $color-two 100%); /* opera 11.10+ */
-  background: -ms-linear-gradient($degrees, $color-one 0%, $color-two 100%); /* ie10+ */
-  background: linear-gradient($degrees, $color-one 0%, $color-two 100%); /* w3c */
-  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='$color-one', endColorstr='$color-two',GradientType=1 ); /* ie6-9 */
+@mixin linear-gradient($color-one, $color-two, $degrees) {
+  background: -moz-linear-gradient($degrees, $color-one 0%, $color-two 100%);
+  /* ff3.6+ */
+  background: -webkit-gradient(linear, left top, right top, color-stop(0%, $color-one), color-stop(100%, $color-two));
+  /* safari4+,chrome */
+  background: -webkit-linear-gradient($degrees, $color-one 0%, $color-two 100%);
+  /* safari5.1+,chrome10+ */
+  background: -o-linear-gradient($degrees, $color-one 0%, $color-two 100%);
+  /* opera 11.10+ */
+  background: -ms-linear-gradient($degrees, $color-one 0%, $color-two 100%);
+  /* ie10+ */
+  background: linear-gradient($degrees, $color-one 0%, $color-two 100%);
+  /* w3c */
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='$color-one', endColorstr='$color-two', GradientType=1);
+  /* ie6-9 */
 }
 
 //
@@ -645,11 +685,12 @@ $im-no-media-expressions: ('screen', 'portrait', 'landscape') !default;
 //
 
 @mixin rotate($direction: rl) {
-  @if $direction == rl {
+  @if $direction ==rl {
     writing-mode: sideways-rl;
     -ms-writing-mode: tb-rl;
     -webkit-writing-mode: vertical-rl;
   }
+
   @else {
     writing-mode: sideways-lr;
     -ms-writing-mode: tb-lr;
@@ -694,14 +735,15 @@ $im-no-media-expressions: ('screen', 'portrait', 'landscape') !default;
 /// font-smothing
 /// @include font-smoothing(on);
 /// @include font-smoothing(off);
-@mixin font-smoothing($value:on){
-  @if $value == on{
-    -webkit-font-smoothing:antialiased;
-    -moz-osx-font-smoothing:grayscale;
+@mixin font-smoothing($value: on) {
+  @if $value ==on {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
-  @else{
-    -webkit-font-smoothing:subpixel-antialiased;
-    -moz-osx-font-smoothing:auto;
+
+  @else {
+    -webkit-font-smoothing: subpixel-antialiased;
+    -moz-osx-font-smoothing: auto;
   }
 }
 
@@ -747,60 +789,82 @@ $im-no-media-expressions: ('screen', 'portrait', 'landscape') !default;
   $width: nth($size, 1);
   $height: nth($size, length($size));
   $foreground-color: nth($color, 1);
-  $background-color: if(length($color) == 2, nth($color, 2), transparent);
+  $background-color: if(length($color)==2, nth($color, 2), transparent);
   height: 0;
   width: 0;
 
-  @if ($direction == up) or ($direction == down) or ($direction == right) or ($direction == left) {
+  @if ($direction ==up) or ($direction ==down) or ($direction ==right) or ($direction ==left) {
     $width: $width / 2;
     $height: if(length($size) > 1, $height, $height/2);
 
-    @if $direction == up {
+    @if $direction ==up {
       border-bottom: $height solid $foreground-color;
       border-left: $width solid $background-color;
       border-right: $width solid $background-color;
-    } @else if $direction == right {
+    }
+
+    @else if $direction ==right {
       border-bottom: $width solid $background-color;
       border-left: $height solid $foreground-color;
       border-top: $width solid $background-color;
-    } @else if $direction == down {
+    }
+
+    @else if $direction ==down {
       border-left: $width solid $background-color;
       border-right: $width solid $background-color;
       border-top: $height solid $foreground-color;
-    } @else if $direction == left {
+    }
+
+    @else if $direction ==left {
       border-bottom: $width solid $background-color;
       border-right: $height solid $foreground-color;
       border-top: $width solid $background-color;
     }
-  } @else if ($direction == up-right) or ($direction == up-left) {
+  }
+
+  @else if ($direction ==up-right) or ($direction ==up-left) {
     border-top: $height solid $foreground-color;
 
-    @if $direction == up-right {
-      border-left:  $width solid $background-color;
-    } @else if $direction == up-left {
+    @if $direction ==up-right {
+      border-left: $width solid $background-color;
+    }
+
+    @else if $direction ==up-left {
       border-right: $width solid $background-color;
     }
-  } @else if ($direction == down-right) or ($direction == down-left) {
+  }
+
+  @else if ($direction ==down-right) or ($direction ==down-left) {
     border-bottom: $height solid $foreground-color;
 
-    @if $direction == down-right {
-      border-left:  $width solid $background-color;
-    } @else if $direction == down-left {
+    @if $direction ==down-right {
+      border-left: $width solid $background-color;
+    }
+
+    @else if $direction ==down-left {
       border-right: $width solid $background-color;
     }
-  } @else if ($direction == inset-up) {
+  }
+
+  @else if ($direction ==inset-up) {
     border-color: $background-color $background-color $foreground-color;
     border-style: solid;
     border-width: $height $width;
-  } @else if ($direction == inset-down) {
+  }
+
+  @else if ($direction ==inset-down) {
     border-color: $foreground-color $background-color $background-color;
     border-style: solid;
     border-width: $height $width;
-  } @else if ($direction == inset-right) {
+  }
+
+  @else if ($direction ==inset-right) {
     border-color: $background-color $background-color $background-color $foreground-color;
     border-style: solid;
     border-width: $width $height;
-  } @else if ($direction == inset-left) {
+  }
+
+  @else if ($direction ==inset-left) {
     border-color: $background-color $foreground-color $background-color $background-color;
     border-style: solid;
     border-width: $width $height;
@@ -817,11 +881,13 @@ $im-no-media-expressions: ('screen', 'portrait', 'landscape') !default;
 $animation-speed: .3s !default;
 
 @mixin animate($properties, $duration: $animation-speed, $easing: ease) {
-  $list:();
+  $list: ();
+
   @each $prop in $properties {
     $str: #{$prop} #{$duration} #{$easing};
     $list: join($list, #{$str}, comma);
   }
+
   transition: $list;
 }
 
@@ -841,11 +907,26 @@ $animation-speed: .3s !default;
 ///   }
 
 @mixin placeholder {
-  &::-webkit-input-placeholder {@content}
-  &::-moz-placeholder {opacity: 1; @content}
-  &:-moz-placeholder {@content}
-  &:-ms-input-placeholder {@content}
-  &.placeholder {@content}
+  &::-webkit-input-placeholder {
+    @content
+  }
+
+  &::-moz-placeholder {
+    opacity: 1;
+    @content
+  }
+
+  &:-moz-placeholder {
+    @content
+  }
+
+  &:-ms-input-placeholder {
+    @content
+  }
+
+  &.placeholder {
+    @content
+  }
 }
 
 /// Font-size px to rem calc
@@ -868,7 +949,7 @@ $animation-speed: .3s !default;
 
   font-size: 0;
 
-  > li {
+  >li {
     display: inline-block;
     vertical-align: $valign;
     font-size: 14px;
@@ -895,18 +976,19 @@ $animation-speed: .3s !default;
 //
 
 @mixin swap-order($prop: 'flex') {
-  @if $prop == 'float' {
+  @if $prop =='float' {
     @extend %clearfix;
 
-    > .swap {
+    >.swap {
       float: left;
     }
   }
+
   @else {
     display: flex;
     flex-wrap: wrap;
 
-    > .swap {
+    >.swap {
       order: 1;
     }
   }
@@ -1018,7 +1100,7 @@ $animation-speed: .3s !default;
 */
 
 @mixin responsive-ratio($x, $y, $pseudo: false) {
-  $padding: unquote( ( $y / $x ) * 100 + '%' );
+  $padding: unquote(($y / $x ) * 100 + '%');
 
   @if $pseudo {
     &:before {
@@ -1027,7 +1109,9 @@ $animation-speed: .3s !default;
       width: 100%;
       padding-top: $padding;
     }
-  } @else {
+  }
+
+  @else {
     padding-top: $padding;
   }
 }
@@ -1046,8 +1130,13 @@ $animation-speed: .3s !default;
 }
 
 @mixin selection {
-  ::-moz-selection { @content; }
-  ::selection { @content; }
+  ::-moz-selection {
+    @content;
+  }
+
+  ::selection {
+    @content;
+  }
 }
 
 @mixin hardware($backface: true, $perspective: 1000) {
@@ -1135,13 +1224,7 @@ $animation-speed: .3s !default;
 // font-size: calc([minimum size] + ([maximum size] - [minimum size]) *
 // ((100vw - [minimum viewport width]) / ([maximum viewport width] - [minimum viewport width])));
 
-@mixin AFS($minS: 16px, $maxS: 6, $minWidth: 320, $maxWidth: 680) {
-  font-size: calc($minS + $maxS * ((100vw - $minWidth + 'px') / $maxWidth));
-}
 
-@mixin FFS($minS: 16px, $maxS: 6, $minWidth: 320, $maxWidth: 680) {
-  font-size: calc($minS + ($maxS - $minS) * ((100vw - $minWidth + 'px') / ($maxWidth - $minWidth)));
-}
 
 //
 // @include column(3);
@@ -1168,15 +1251,19 @@ $animation-speed: .3s !default;
   @-webkit-keyframes #{$animation-name} {
     @content;
   }
+
   @-moz-keyframes #{$animation-name} {
     @content;
   }
+
   @-ms-keyframes #{$animation-name} {
     @content;
   }
+
   @-o-keyframes #{$animation-name} {
     @content;
   }
+
   @keyframes #{$animation-name} {
     @content;
   }
