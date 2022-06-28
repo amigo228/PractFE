@@ -56,7 +56,7 @@ ul {
     padding-top: 150px;
   }
 }
-.new-container .line {
+.new-container .line-gallery {
   width: 100%;
   max-width: 100px;
   margin: 0 auto 30px;
@@ -381,13 +381,9 @@ ul {
 }
 
 .child {
+  height: 515px;
   background-color: #fff;
   padding-bottom: 30px;
-}
-@media (min-width: 769px) {
-  .child {
-    height: 515px;
-  }
 }
 .child .img-holder img {
   width: 100%;
@@ -438,6 +434,7 @@ ul {
 
 .flex-item {
   padding: 0 15px;
+  width: 100%;
 }
 
 .avatar-holder {
