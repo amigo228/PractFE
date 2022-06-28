@@ -49,9 +49,8 @@ ul {
 }
 
 .container {
-  max-width: 1170px;
+  max-width: 1200px;
   width: 100%;
-  padding: 0 15px;
   margin: 0 auto;
 }
 
@@ -472,4 +471,3 @@ ul {
   -webkit-transform: translate(-50%, -50%);
           transform: translate(-50%, -50%);
 }
-/*# sourceMappingURL=main.css.map */
