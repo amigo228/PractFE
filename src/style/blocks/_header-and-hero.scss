@@ -370,3 +370,10 @@
         }
     }
 }
+
+.js-header {
+    @include media ('<1024px') {
+        padding: 25px 15px 0;
+    }
+
+}

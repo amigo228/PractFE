@@ -461,6 +461,12 @@ ul {
           transform: translate(-50%, -50%);
 }
 
+@media (max-width: 1023px) {
+  .js-header {
+    padding: 25px 15px 0;
+  }
+}
+
 .new-container {
   font-family: "Montserrat", sans-serif;
   max-width: 1200px;
@@ -802,9 +808,22 @@ ul {
   background-color: #fff;
   padding-bottom: 30px;
 }
+.child .img-holder {
+  margin-bottom: 10px;
+}
+@media (min-width: 1025px) {
+  .child .img-holder {
+    margin-bottom: 30px;
+  }
+}
 .child .img-holder img {
   width: 100%;
-  margin-bottom: 30px;
+  max-height: 330px;
+}
+@media (min-width: 1025px) {
+  .child .img-holder img {
+    max-height: unset;
+  }
 }
 .child strong,
 .child span {
@@ -834,16 +853,18 @@ ul {
 .child span {
   font-size: 14px;
   line-height: 20px;
-  margin-bottom: 39px;
+  margin-bottom: 9px;
 }
 @media (min-width: 769px) {
   .child span {
     font-size: 16px;
     line-height: 23px;
+    margin-bottom: 19px;
   }
 }
 @media (min-width: 1025px) {
   .child span {
+    margin-bottom: 39px;
     font-size: 18px;
     line-height: 25px;
   }
@@ -863,6 +884,8 @@ ul {
 }
 .avatar-holder img {
   border-radius: 50%;
+  max-width: 60px;
+  max-height: 60px;
 }
 .avatar-holder .info-holder {
   font-family: "Montserrat", sans-serif;
@@ -877,7 +900,13 @@ ul {
 }
 .avatar-holder .info-holder h4 {
   font-weight: 400;
-  font-size: 18px;
-  line-height: 22px;
+  font-size: 14px;
+  line-height: 18px;
   color: #2C4058;
+}
+@media (min-width: 1025px) {
+  .avatar-holder .info-holder h4 {
+    font-size: 18px;
+    line-height: 22px;
+  }
 }
