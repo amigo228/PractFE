@@ -1047,6 +1047,21 @@ ul {
           flex-direction: column;
   position: relative;
 }
+.form .form-holder .btn {
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 25px;
+  background-color: transparent;
+}
+.form .form-holder .btn:hover {
+  background-color: aqua;
+}
+@media (min-width: 769px) {
+  .form .form-holder .btn {
+    font-size: 18px;
+    line-height: 27px;
+  }
+}
 @media (min-width: 768px) {
   .form .form-holder {
     margin-left: 54px;
