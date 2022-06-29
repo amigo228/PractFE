@@ -1,0 +1,100 @@
+.footer {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    
+    margin: 0 auto;
+
+    @include media ('>=tablet') {
+        flex-direction: row;
+    }
+
+    .credit {
+        // padding-left: 40px;
+        margin: 0 auto;
+        
+
+        @include media ('>=1440px') {
+            padding-left: 376px;
+            margin: 0;
+        }
+    }
+    
+    .logo-holder {
+        // display: inline-block;
+        padding-top: 203px;
+        margin-bottom: 41px;
+    }
+
+    .logo-holder img {
+        margin: 0 auto;
+    }
+    
+    .credit-desc {
+        padding-bottom: 20px;
+        // display: inline-block;
+        text-align: center;
+        & p{
+            font-weight: 400;
+            font-size: 14px;
+            color: #FFFFFF;
+        }
+
+        @include media ('>=1440px') {
+            padding-bottom: 234px;
+            text-align: start;
+        }
+    }
+
+    .social {
+        display: flex;
+        flex-wrap: wrap;
+        max-width: 160px;
+        width: 100%;
+        justify-content: space-between;
+        padding-top: 20px;
+        padding-bottom: 20px;
+        margin: 0 auto;
+        
+        @include media ('>=tablet') {
+            padding-top: 203px;
+        }
+
+        @include media ('>=1440px') {
+            display: flex;
+            flex-wrap: wrap;
+            max-width: 160px;
+            width: 100%;
+            justify-content: space-between;
+            padding-top: 209px;
+            margin-left: 369px;
+            padding-bottom: 0;
+        }
+    }
+
+    .facebook {
+        // padding: 11px 15px;
+        // border-radius: 100%;
+        // border: 1px solid #fff;
+        // height: 40px;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+        max-width: 40px;
+        width: 100%;
+        height: 40px;
+        border-radius: 100%;
+        border: 1px solid rgb(255,255,255, 0.4);
+    }
+
+    .twitter {
+        @extend .facebook;
+    }
+
+    .instagram {
+        @extend .facebook;
+    }
+
+}
+

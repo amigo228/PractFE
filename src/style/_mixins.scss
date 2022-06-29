@@ -1135,13 +1135,13 @@ $animation-speed: .3s !default;
 // font-size: calc([minimum size] + ([maximum size] - [minimum size]) *
 // ((100vw - [minimum viewport width]) / ([maximum viewport width] - [minimum viewport width])));
 
-@mixin AFS($minS: 16px, $maxS: 6, $minWidth: 320, $maxWidth: 680) {
-  font-size: calc($minS + $maxS * ((100vw - $minWidth + 'px') / $maxWidth));
-}
+// @mixin AFS($minS: 16px, $maxS: 6, $minWidth: 320, $maxWidth: 680) {
+//   font-size: calc($minS + $maxS * ((100vw - $minWidth + 'px') / $maxWidth));
+// }
 
-@mixin FFS($minS: 16px, $maxS: 6, $minWidth: 320, $maxWidth: 680) {
-  font-size: calc($minS + ($maxS - $minS) * ((100vw - $minWidth + 'px') / ($maxWidth - $minWidth)));
-}
+// @mixin FFS($minS: 16px, $maxS: 6, $minWidth: 320, $maxWidth: 680) {
+//   font-size: calc($minS + ($maxS - $minS) * ((100vw - $minWidth + 'px') / ($maxWidth - $minWidth)));
+// }
 
 //
 // @include column(3);
